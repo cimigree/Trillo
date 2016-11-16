@@ -1,0 +1,12 @@
+﻿@model Trello.Models.Trillo
+@{
+    ViewBag.Title = "EditTask";
+}
+<form action="/home/UpdateTask" method="POST">
+    <input type="hidden" name="ID" value="@Model.ID" />
+    Task Name: <input type="text" name="TaskName" value="@Model.TaskName" /><br />
+    Notes: <input type="text" name="Notes" value="@Model.Notes" /><br />
+    Due Date: <input type="datetime" name="DueDate" value="@Model.DueDate" /><br />
+    <input type="submit" value="Update" class="btn" />
+</form>
+
