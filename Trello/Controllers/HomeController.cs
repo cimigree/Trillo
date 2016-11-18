@@ -49,16 +49,16 @@ namespace Trello.Controllers
             Trillo myTrello = db.Trillos.Find(ID);
             myTrello.TaskName = TaskName;
             myTrello.Notes = Notes;
-            myTrello.DueDate = DueDate;       
+            myTrello.DueDate = DueDate;
             db.SaveChanges();
             return RedirectToAction("ViewTask", new { ID = myTrello.ID });
 
         }
-        
+
         // Displaying all of the Trello cards
         public ActionResult DisplayTasks()
         {
-            return View(db.Trillos.ToList());
+            return View(db.Trillos.OrderBy(c=> c.SortOrder).ToList());
         }
 
         //Finding correct task by ID, removing it, displaying the homepage with all of the tasks
@@ -78,25 +78,36 @@ namespace Trello.Controllers
             myTrello.TaskName = TaskName;
             myTrello.Notes = Notes;
             myTrello.DueDate = DueDate;
-            myTrello.SortOrder = myTrello.ID;
-
             db.Trillos.Add(myTrello);
             db.SaveChanges();
 
-            return RedirectToAction("ViewTask", new { id = myTrello.ID });
-
-
-
-
-
+            myTrello = db.Trillos.Find(myTrello.ID);
+            myTrello.SortOrder = myTrello.ID;
+            db.SaveChanges();
+            return View();
 
         }
+    
 
+        public ActionResult UpdateOrder(int[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                Trillo myTrello = db.Trillos.Find(array[i]);
+                       myTrello.SortOrder = i;
+            }
+            db.SaveChanges();
+            return View();
 
+        }
        
 
-     
 
-        
+
+
+
+
+
+
     }
 }

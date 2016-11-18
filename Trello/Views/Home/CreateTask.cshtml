@@ -3,13 +3,16 @@
 @{
     ViewBag.Title = "CreateTask";
 }
+<div class="container">
+<div class="card">
+    <form action="/home/SaveTask" method="POST">
+        Task Name: <input type="text" name="TaskName" /><br />
+        Notes: <input type="text" name="Notes" /><br />
+        Due Date: <input type="date" name="DueDate" /><br />
+        <input type="submit" value="Save" class="btn" />
+    </form>
+</div>
+    </div>
 
-<h2>Create Task</h2>
-<form action="/home/SaveTask" method="POST">
-    Task Name: <input type ="text" name="TaskName"/><br />
-    Notes: <input type="text" name="Notes" /><br />
-    Due Date: <input type="date" name="DueDate" /><br />
-    <input type ="submit" value="Save" class ="btn"/>
-       </form>
 
-
+@*<button id="addCard" onclick="CreateTask()">Create</button>*@

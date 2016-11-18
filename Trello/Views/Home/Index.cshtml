@@ -1,31 +1,80 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Index";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+<div id="cardDiv"></div>
+<input type="text" id="Title" />
+<button id="addCard" onclick="addCard()">Add Card</button>
+
+
+@section scripts {
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        function CreateTask() {
+            $.CreateTask
+            {
+
+                $.ajax
+                    ({
+                        url: "/Home/CreateTask",
+                        type: GET,
+                        success: function (result) {
+                        }
+                    })
+            }
+        }
+
+        function setCardDiv(text) {
+            $("#cardDiv").html(text)
+        }
+      
+        $(displayTasks)
+        //The above should "go" as soon as the page loads to display all of the cards.
+        function DisplayTasks() {
+            $.ajax({
+                url: "/Home/DisplayTasks",
+                type: GET,
+                success: function (result) {
+
+                }
+
+            })
+        }
+        // I want this ajax call to run when the create button at the top of the screen is clicked. It should call in the create task boxes. On click save, I want it to run the SaveCard function.
+        function CreateTask() {
+            $.CreateTask
+            {
+
+                $.ajax
+                    ({
+                        url: "/Home/CreateTask",
+                        type: GET,
+                        success: function (result) {
+                        }
+                    })
+            }
+        }
+
+        function UpdateOrder() {
+
+            $("#SortOrder").sortable({
+                update: function () {
+                    var data = $(this).sortable('ToArray', { attribute: 'predmet-id' });
+                    $.ajax({
+                        url: "/Home/UpdateOrder",
+                        type: POST,
+                        data: { array: $("data") }, 
+                        success: function () { }
+                    })
+                }
+            })
+        }
+
+        
+
+        
+    </script>
+
+    }
+        

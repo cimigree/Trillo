@@ -269,6 +269,8 @@
     <Content Include="Views\Home\CreateTask.cshtml" />
     <Content Include="Views\Home\DisplayTasks.cshtml" />
     <Content Include="Views\Home\EditTask.cshtml" />
+    <Content Include="Views\Home\SaveTask.cshtml" />
+    <Content Include="Views\Home\UpdateOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
