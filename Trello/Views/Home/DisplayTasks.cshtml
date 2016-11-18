@@ -9,8 +9,8 @@
 
 
 
-{ <div class="card" id=@trillo.SortOrder>
-      <input type="hidden" name="SortOrder" value="@trillo.SortOrder"  />
+{ <div class="card" >
+      <input type="hidden" name="SortOrder"/>
         <h2>@trillo.TaskName</h2>
         <h3>@trillo.Notes</h3>
         <h3>@trillo.DueDate</h3>
@@ -22,9 +22,27 @@
 @section scripts {
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-        $(function () {
-            $("#SortOrder").sortable();
-        });
+
+            $("#SortOrder").sortable({
+                update: function () {
+                    var data = { array: $(this).sortable('ToArray') };
+                    $.ajax({
+                        url: "/Home/UpdateOrder",
+                        type: "POST",
+                        data: data,
+                        success: function () { }
+                    })
+                }
+            })
+
+
+
+
+
+</script>
+
+
+
 
         
 

@@ -1,40 +1,19 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Home Page";
 }
 
-
-<div id="cardDiv"></div>
-<input type="text" id="Title" />
-<button id="addCard" onclick="addCard()">Add Card</button>
 
 
 @section scripts {
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-        function CreateTask() {
-            $.CreateTask
-            {
-
-                $.ajax
-                    ({
-                        url: "/Home/CreateTask",
-                        type: GET,
-                        success: function (result) {
-                        }
-                    })
-            }
-        }
-
-        function setCardDiv(text) {
-            $("#cardDiv").html(text)
-        }
-      
-        $(displayTasks)
+   
+$(displayTasks);
         //The above should "go" as soon as the page loads to display all of the cards.
         function DisplayTasks() {
             $.ajax({
                 url: "/Home/DisplayTasks",
-                type: GET,
+                type: "GET",
                 success: function (result) {
 
                 }
@@ -43,38 +22,33 @@
         }
         // I want this ajax call to run when the create button at the top of the screen is clicked. It should call in the create task boxes. On click save, I want it to run the SaveCard function.
         function CreateTask() {
-            $.CreateTask
-            {
-
                 $.ajax
                     ({
                         url: "/Home/CreateTask",
-                        type: GET,
+                        type: "GET",
                         success: function (result) {
                         }
                     })
             }
-        }
-
-        function UpdateOrder() {
-
+        
+ 
             $("#SortOrder").sortable({
                 update: function () {
-                    var data = $(this).sortable('ToArray', { attribute: 'predmet-id' });
+                    var data = { array: $(this).sortable('ToArray') };
                     $.ajax({
                         url: "/Home/UpdateOrder",
-                        type: POST,
-                        data: { array: $("data") }, 
+                        type: "POST",
+                        data: data, 
                         success: function () { }
                     })
                 }
             })
-        }
+        
 
         
 
         
     </script>
 
-    }
+
         
