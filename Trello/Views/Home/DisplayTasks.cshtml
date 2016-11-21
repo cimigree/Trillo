@@ -3,48 +3,8 @@
     ViewBag.Title = "DisplayTasks";
 }
 
-<div class = "container" id="SortOrder">
+<div>
+
+</div>
     
-@foreach (Trello.Models.Trillo trillo in Model)
-
-
-
-{ <div class="card" >
-      <input type="hidden" name="SortOrder"/>
-        <h2>@trillo.TaskName</h2>
-        <h3>@trillo.Notes</h3>
-        <h3>@trillo.DueDate</h3>
-        <a href="/home/EditTask/@trillo.ID" class="btn-sm">Edit</a>        <a href="/home/Delete/@trillo.ID" class="btn-sm">Delete</a>
-    </div>
-}
-    </div>
-
-@section scripts {
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-
-            $("#SortOrder").sortable({
-                update: function () {
-                    var data = { array: $(this).sortable('ToArray') };
-                    $.ajax({
-                        url: "/Home/UpdateOrder",
-                        type: "POST",
-                        data: data,
-                        success: function () { }
-                    })
-                }
-            })
-
-
-
-
-
-</script>
-
-
-
-
-        
-
-</script>  }
 

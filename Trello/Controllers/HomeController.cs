@@ -15,7 +15,7 @@ namespace Trello.Controllers
         // This action creates our home view, which will display all of the taskcards.
         public ActionResult Index()
         {
-            return View();
+            return View(db.Trillos.OrderBy(c => c.SortOrder).ToList());
         }
 
         //This action (function/method) will be called to create a new card.
@@ -51,7 +51,7 @@ namespace Trello.Controllers
             myTrello.Notes = Notes;
             myTrello.DueDate = DueDate;
             db.SaveChanges();
-            return RedirectToAction("ViewTask", new { ID = myTrello.ID });
+            return RedirectToAction("Index", new { ID = myTrello.ID });
 
         }
 
@@ -67,7 +67,8 @@ namespace Trello.Controllers
         {
             Trillo myTrello = db.Trillos.Find(ID);
             db.Trillos.Remove(myTrello);
-            return RedirectToAction("DisplayTasks");
+            db.SaveChanges();
+            return RedirectToAction("Index");
 
         }
 
@@ -78,18 +79,16 @@ namespace Trello.Controllers
             myTrello.TaskName = TaskName;
             myTrello.Notes = Notes;
             myTrello.DueDate = DueDate;
+            myTrello.SortOrder = 1000;
             db.Trillos.Add(myTrello);
             db.SaveChanges();
+            return RedirectToAction("Index");
 
-            myTrello = db.Trillos.Find(myTrello.ID);
-            myTrello.SortOrder = myTrello.ID;
-            db.SaveChanges();
-            return View();
-
+        
         }
     
 
-        public ActionResult UpdateOrder(int[] array)
+        public string UpdateOrder(int[] array)
         {
             for (int i = 0; i < array.Length; i++)
             {
@@ -97,10 +96,10 @@ namespace Trello.Controllers
                        myTrello.SortOrder = i;
             }
             db.SaveChanges();
-            return View();
+            return "Order is now updated!";
 
         }
-       
+        
 
 
 

@@ -1,40 +1,36 @@
-﻿@{
+﻿@model IEnumerable<Trello.Models.Trillo>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
 
 
+
+
+<div class="container" id="SortOrder">
+
+    @foreach (Trello.Models.Trillo trillo in Model)
+
+
+   
+    { <div class="card" id=@trillo.ID>
+        <input type="hidden" name="SortOrder" />
+        <h2>@trillo.TaskName</h2>
+        <h3>@trillo.Notes</h3>
+        <h3>@trillo.DueDate</h3>
+        <a href="/home/EditTask/@trillo.ID" class="btn-sm">Edit</a>      <a href="/home/Delete/@trillo.ID" class="btn-sm">Delete</a>
+    </div>
+    }
+</div>
+
 @section scripts {
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
    
-$(displayTasks);
-        //The above should "go" as soon as the page loads to display all of the cards.
-        function DisplayTasks() {
-            $.ajax({
-                url: "/Home/DisplayTasks",
-                type: "GET",
-                success: function (result) {
-
-                }
-
-            })
-        }
-        // I want this ajax call to run when the create button at the top of the screen is clicked. It should call in the create task boxes. On click save, I want it to run the SaveCard function.
-        function CreateTask() {
-                $.ajax
-                    ({
-                        url: "/Home/CreateTask",
-                        type: "GET",
-                        success: function (result) {
-                        }
-                    })
-            }
-        
- 
             $("#SortOrder").sortable({
                 update: function () {
-                    var data = { array: $(this).sortable('ToArray') };
+                    var data = { array: $(this).sortable('toArray') };
                     $.ajax({
                         url: "/Home/UpdateOrder",
                         type: "POST",
@@ -44,11 +40,7 @@ $(displayTasks);
                 }
             })
         
-
-        
-
-        
     </script>
 
-
+    }
         
