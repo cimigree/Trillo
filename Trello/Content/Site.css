@@ -24,21 +24,22 @@ textarea {
 }
 
 .card {
-    background-color:lightgray;
+    background-color:darkorange;
     width: 320px;
     height: auto;
     font-family: Arial;
     color:navy;
-    margin: 10px 0 10px 0;
+    margin: 10px 0 10px 0; 
     text-align: left;
     padding: 10px;
-    border-radius: 20px;
+    border-radius: 0px;
     
 }
 
 .container {
     width: 100%;
-    background-color: black;
+    background-color: white;
+    padding-top: 20px;
 }
 
 
